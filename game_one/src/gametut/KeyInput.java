@@ -53,6 +53,7 @@ public class KeyInput extends KeyAdapter	{
 				
 				//vertical movement
 				if(!keyDown[0] && !keyDown[1]) tempObject.setVelY(0);
+				//horizontal
 				if(!keyDown[2] && !keyDown[3]) tempObject.setVelX(0);
 			}
 

@@ -16,7 +16,7 @@ public class BasicEnemy extends GameObject	{
 	}
 	
 	public Rectangle getBounds()	{
-		return new Rectangle(x, y, 16, 16);
+		return new Rectangle((int)x, (int)y, 16, 16);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class BasicEnemy extends GameObject	{
 		if(x <= 0 || x >= Game.WIDTH - 16)
 			velX *= -1;
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.02f, handler));
+		handler.addObject(new Trail((int)x, (int)y, ID.Trail, Color.red, 16, 16, 0.02f, handler));
 		
 		
 	}
@@ -37,7 +37,7 @@ public class BasicEnemy extends GameObject	{
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.red);
-		g.fillRect(x, y, 16, 16);
+		g.fillRect((int)x, (int)y, 16, 16);
 		
 	}
 

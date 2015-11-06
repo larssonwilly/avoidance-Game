@@ -28,6 +28,8 @@ public class Spawn {
 				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 64) + 32, r.nextInt(Game.HEIGHT - 64) + 32, ID.BasicEnemy, handler));
 			}	else if(hud.getLevel() == 4)	{
 				handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH - 64) + 32, r.nextInt(Game.HEIGHT - 64) + 32, ID.FastEnemy, handler));
+			}	else if(hud.getLevel() == 5)	{
+				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 64) + 32, r.nextInt(Game.HEIGHT - 64) + 32, ID.SmartEnemy, handler));
 			}
 		}
 	}

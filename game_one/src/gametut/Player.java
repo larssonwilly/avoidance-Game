@@ -7,10 +7,13 @@ import java.awt.Rectangle;
 public class Player extends GameObject	{
 
 	Handler handler;
+	private HUD hud;
+	private int level10Counter = 0;
 	
-	public Player(int x, int y, ID id, Handler handler) {
+	public Player(int x, int y, ID id, Handler handler, HUD hud) {
 		super(x, y, id);
 		this.handler = handler;
+		this.hud = hud;
 
 	}
 	
@@ -23,8 +26,15 @@ public class Player extends GameObject	{
 		x += velX;
 		y += velY;
 		
-		x = Game.clamp(x, 0, Game.WIDTH - 37);
-		y = Game.clamp(y, 0, Game.HEIGHT - 60);
+		if(hud.getLevel() == 10){
+			if (level10Counter == 0) x = y = 300;
+			level10Counter++;
+			y = Game.clamp(y, 150, Game.HEIGHT - 60);
+		} else	{
+			x = Game.clamp(x, 0, Game.WIDTH - 37);
+			y = Game.clamp(y, 0, Game.HEIGHT - 60);
+		}
+
 		
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, 32, 32, 0.05f, handler));
 		

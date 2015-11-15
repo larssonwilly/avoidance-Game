@@ -36,6 +36,7 @@ public class EnemyBoss extends GameObject	{
 		if(timer2 <= 0)	{
 			if(velX == 0) velX = 2;
 			
+			velX *= 1.001;
 			int spawn = r.nextInt(10);
 			if(spawn == 0) handler.addObject(new EnemyBossBullet((int)x + 48, (int)y + 48, ID.BasicEnemy, handler));
 		}

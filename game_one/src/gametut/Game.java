@@ -30,7 +30,8 @@ public class Game extends Canvas implements Runnable {
 	public enum STATE	{
 		Menu,
 		Game,
-		Help
+		Help, 
+		End
 	};
 	
 	public STATE gameState = STATE.Menu;
@@ -43,15 +44,15 @@ public class Game extends Canvas implements Runnable {
 		
 		hud = new HUD();
 		spawner = new Spawn(handler, this);
-		menu = new Menu(this, handler);
+		menu = new Menu(this, handler, hud);
 
 		this.addMouseListener(menu);
 		
 		r = new Random();
 		
 		if(gameState == STATE.Menu)	{
-			handler.addEnemies(ID.ColorEnemy, 5);
-			System.out.println(handler.object.size() + " 1");
+			handler.addEnemies(ID.ColorEnemy, 10);
+			//System.out.println(handler.object.size() + " 1");
 		}
 
 	}
@@ -105,8 +106,18 @@ public class Game extends Canvas implements Runnable {
 		handler.tick();
 		if(gameState == STATE.Game)	{
 			hud.tick();
+			
+			if(HUD.HEALTH <= 0)	{
+				HUD.HEALTH = 100;
+				
+				gameState = STATE.End;
+				handler.object.clear();
+				handler.addEnemies(ID.ColorEnemy, 5);
+
+			}
+			
 			spawner.tick();
-		}	else if(gameState == STATE.Menu)	{
+		}	else if(gameState == STATE.Menu || gameState == STATE.End)	{
 			menu.tick();
 		}	
 		
@@ -124,12 +135,14 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		handler.render(g);
+		if(gameState != STATE.Help)
+			handler.render(g);
 		
 		if(gameState == STATE.Game)	{
 			hud.render(g);
-		}	else if(gameState == STATE.Menu || gameState == STATE.Help)	{
-			menu.render(g);
+		}	else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End)	{
+				menu.render(g);
+
 		}	
 		
 		g.dispose();

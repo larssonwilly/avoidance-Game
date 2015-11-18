@@ -1,12 +1,12 @@
 package gametut;
 
 import java.awt.Graphics;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Handler {
 	
-	LinkedList<GameObject> object = new LinkedList<GameObject>();
+	ArrayList<GameObject> object = new ArrayList<GameObject>();
 	private Random r = new Random();
 	
 	public void tick()	{
@@ -17,7 +17,7 @@ public class Handler {
 		}
 	}
 	
-	public void render(Graphics g)	{
+	public synchronized void render(Graphics g)	{
 		for(int i=0; i < object.size(); i++)	{
 			GameObject tempObject = object.get(i);
 			

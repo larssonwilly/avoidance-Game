@@ -10,7 +10,7 @@ public class Player extends GameObject	{
 	private HUD hud;
 	private int level10Counter = 0;
 	
-	public Player(int x, int y, ID id, Handler handler, HUD hud) {
+	public Player(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		this.hud = hud;
@@ -26,10 +26,11 @@ public class Player extends GameObject	{
 		x += velX;
 		y += velY;
 		
-		if(hud.getLevel() == 10){
+		if(HUD.level == 10 || HUD.level == 11 || HUD.level == 12 || HUD.level == 13 || HUD.level == 14 || HUD.level == 15){
 			if (level10Counter == 0) x = y = 300;
 			level10Counter++;
 			y = Game.clamp(y, 150, Game.HEIGHT - 60);
+			x = Game.clamp(x, 0, Game.WIDTH - 37);
 		} else	{
 			x = Game.clamp(x, 0, Game.WIDTH - 37);
 			y = Game.clamp(y, 0, Game.HEIGHT - 60);
@@ -51,8 +52,7 @@ public class Player extends GameObject	{
 					HUD.HEALTH -= 2;
 				}
 			}
-			
-			
+
 		}
 	}
 
